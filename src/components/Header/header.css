@@ -1,0 +1,40 @@
+header{
+    background: #3E3E3E;
+    padding: 17px 40px;
+    margin: 0;
+    
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header h1{
+    color: #fff;
+    font-size: 20px;
+}
+
+.search input {
+    width: 750px;
+    background: #323232;
+    color: #fff;
+    border: none;
+    border-radius: 22px;
+    padding: 20px 30px;
+}
+
+.connect_wallet button{
+    color: #fff;
+    border-radius: 22px;
+    border: 1px solid #fff;
+    padding: 7px 30px;
+    text-decoration: none;
+}
+.connect_wallet a:hover{
+    color:#fff;
+}
+.search img{
+    position: relative;
+    right: 3rem;
+    top:15px
+}

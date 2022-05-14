@@ -1,0 +1,54 @@
+.main_container{
+    display: flex;
+}
+aside{
+    width: 20%;
+}
+
+main{
+    width: 80%;
+    background: #0E0E10;
+    padding: 35px;
+}
+
+.main_con img{
+    max-width: 100%;
+}
+
+.main_con h2{
+    font-size: 16px;
+    color: #fff;
+    margin-top: 10px;;
+}
+
+.videoBox{
+    width: 286px;
+    height: 149px;
+    background: #5B5B5B;
+    position: relative;
+}
+
+.videoBox img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.liveChannelFlex{
+display:flex;
+margin-top:2rem;
+flex-wrap: wrap;
+}
+
+.liveChannelBox{
+    margin-right: 0.9rem;
+    cursor: pointer;
+    
+}
+
+.liveChannelBox .recommended_users_list{
+    background: transparent;
+    margin: 0;
+   
+}
