@@ -1,0 +1,35 @@
+.profile-details-wrapper{
+    /* padding: 20px; */
+    margin-bottom: 10px;
+}
+
+.backGround{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileImage .Icon img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profile-mage-background{
+    position: relative;
+    height: 170px;
+    overflow: hidden;
+}
+
+.profileImage{
+    position: absolute;
+    top: 25%;
+    left: 30px;
+}
+
+.editButton{
+    position: absolute;
+    top: 10%;
+    right: 30px;
+    color: white;
+}

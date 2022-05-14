@@ -1,0 +1,22 @@
+.all-channels{
+    color: white;
+    text-align: left;
+    padding: 30px 5px 50px 25px;
+}
+
+.channelItem{
+    color: white;
+    margin: 10px 0px;
+    padding: 6px 0px 6px 12px;
+    border-radius: 15px;
+}
+
+.channelItem:hover{
+    background-color: rgb(54, 54, 54);
+    
+}
+
+.user-channel{
+    font-weight: bolder;
+    margin: 15px 0px 15px 0px;
+}

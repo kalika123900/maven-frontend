@@ -1,0 +1,21 @@
+.tab-titles{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.videoContents{
+    text-align: left;
+}
+
+.content-tab-wrapper{
+    margin-top: 20px;
+    color: white;
+}
+
+.active-tab{
+    color: rgb(0, 174, 255)
+}
+
+.tab{
+    cursor: pointer;
+}
