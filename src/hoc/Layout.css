@@ -1,6 +1,9 @@
 .main_container{
     display: flex;
+    align-items: stretch;
+    flex-direction: row;
 }
+
 aside{
     width: 20%;
 }
@@ -51,4 +54,27 @@ flex-wrap: wrap;
     background: transparent;
     margin: 0;
    
+}
+
+.page-wrapper{
+    position: relative;
+}
+
+.sidePanel{
+    width: 200px;
+    position: absolute;
+    transition-timing-function: ease;
+    transition: 0.2s;
+    background-color: white;
+    color: black;
+    font-weight: bolder;
+    padding: 20px 0px;
+}
+
+.sidePanelClose{
+    left: -200px;
+}
+
+.sidePanelOpen{
+    left: 0;
 }

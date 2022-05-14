@@ -24,17 +24,33 @@ header h1{
 }
 
 .connect_wallet button{
-    color: #fff;
+    color: black;
     border-radius: 22px;
     border: 1px solid #fff;
-    padding: 7px 30px;
+    padding: 20px 20px;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    font-weight: bolder;
 }
-.connect_wallet a:hover{
-    color:#fff;
+.connect_wallet button:hover{
+    transform: scale(1.1);
+    transition-timing-function: ease;
+    transition: 0.2s;
 }
 .search img{
     position: relative;
     right: 3rem;
     top:15px
+}
+
+.header-menu-icon {
+    margin-right: -80px
+}
+
+.header-menu-icon img {
+    margin-left: -13px;
+    width: 30px;
 }

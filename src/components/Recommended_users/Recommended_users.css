@@ -1,62 +1,15 @@
-.recommended_users{
-    background: #2B2B2B;
-    height:92.3vh;
-   
-    padding:3rem 40px;
-}
-
-.recommended_titel{
-    color:#fff;
-    font-size:14px;
-    text-transform:uppercase;
-    margin-bottom: 3rem;
-}
-
-.recommended_users_list{
-    background: #232323;
-    border-radius:22px;
-    cursor: pointer;
-}
-
-.recommended_users_list{
-    display:flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.recommended_profiles{
+.recommendedSection{
     display: flex;
-    align-items: center;
-}
-.recommended_profiles .circle{
-    width: 21px;
-    height: 21px;
-    border-radius: 50%;
-    border-radius: 1px solid #7AFF16;
-    background: #fff;
-    margin-right: 0.5rem;
-}
-.recommended_profiles_titel h6{
-    color: #fff;
-    font-size: 12px;
-    margin: 0;
+    flex-direction: column;
 }
 
-.recommended_profiles_titel p{
-    color: #fff;
-    font-size: 9px;
-    margin: 0;
+.recommendedWrapper {
+    flex-grow: 1;
 }
 
-.views{
-    color: #fff;
-}
-
-  .red_cricle{
-    background: red;
-    height: 5px;
-    width: 5px;
-    border-radius: 50%;
+.recommendedTitle{
+    color: white;
+    text-align: left;
+    margin: 20px 10px 0px 10px;
+    font-weight: bold;
 }
