@@ -29,6 +29,7 @@ function Layout(props) {
         logoutHandler={props.logoutHandler}
         publicAddress={props.publicAddress}
         LoginHandler={props.clickHandler}
+        torusstate={props.torusstate}
         toggleMenu={handleToggleMenu}
       />
 

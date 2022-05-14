@@ -28,7 +28,7 @@ export default function Header(props) {
             {props.publicAddress ? (
               <button onClick={props.logoutHandler}>Logout</button>
             ) : (
-              <button onClick={props.LoginHandler}>CONNECT WALLET</button>
+              <button onClick={props.LoginHandler} disabled={!props.torusstate}>CONNECT WALLET</button>
             )}
           </div>
         </div>
