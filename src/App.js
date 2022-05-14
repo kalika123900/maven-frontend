@@ -6,7 +6,6 @@ import { keccak256 } from 'ethers/lib/utils';
 import { getV3TypedData, getV4TypedData, whiteLabelData } from './data';
 import web3Obj from './helper';
 
-
 import Header from './components/Header/Header';
 import './components/Header/header.css';
 import Recommended_users from './components/Recommended_users/Recommended_users';
