@@ -74,7 +74,15 @@ export default function Header(props) {
                     <div>{user.name}</div>
                     <div>{user.email}</div>
                   </div>
-                  <img width={50} src={ProfileSvg} alt="profile" />
+                  <img
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
+                    }}
+                    src={user.profileImage}
+                    alt="profile"
+                  />
                 </div>
               </>
             ) : (
