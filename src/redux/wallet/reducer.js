@@ -8,7 +8,6 @@ const initialState = {
 };
 
 const walletReducer = (state = initialState, action) => {
-  console.log("this is called");
   const { type, payload } = action;
   switch (type) {
     case SET_WALLET: {

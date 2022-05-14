@@ -1,6 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function Popup() {
+  const dataObject = useSelector((state)=>state);
   return (
      <>
         <div className="popup">
@@ -9,25 +11,25 @@ export default function Popup() {
                     <div className="col-md-6">
                         <div class="mb-3">
                           <label for=" ">Name</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your Name"/>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your Name" value={dataObject?.user?.name}/>
                         </div>
                     </div>
                     <div className="col-md-6">
                         <div class="mb-3">
                         <label for=" ">Username</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Username"/>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Username" value={dataObject?.user?.email}/>
                         </div>
                     </div>
                     <div className="col-md-12">
                         <div class="mb-3">
                         <label for=" ">  RTMP URL</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder=" rtmp://rtmp.livepeer.com/live  "/>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" value="rtmp://rtmp.livepeer.com/live"/>
                         </div>
                     </div>
                     <div className="col-md-12">
                         <div class="mb-3">
-                        <label for=" ">   Streamer Key</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="9a05-dt5b-0g0u-osxx"/>
+                        <label for=" ">   Stream id</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="9295-dt5b-0g0u-osxx" value={dataObject?.stream?.streamId}/>
                         </div>
                     </div>
                     <div className="col-md-12">
