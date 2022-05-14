@@ -6,6 +6,10 @@ import { keccak256 } from 'ethers/lib/utils';
 import { getV3TypedData, getV4TypedData, whiteLabelData } from './data';
 import web3Obj from './helper';
 
+import {clusterApi, Connection } from "@solana/web3.js";
+
+import Torus from "@toruslabs/solana-embed";
+
 import Header from './components/Header/Header';
 import './components/Header/header.css';
 import Recommended_users from './components/Recommended_users/Recommended_users';
@@ -15,8 +19,12 @@ import Layout from './hoc/Layout';
 import '../src/hoc/Layout.css';
 
 const tokenAbi = require('human-standard-token-abi');
+const torus = new Torus();
+
+
 
 class Login extends React.Component {
+  
   state = {
     publicAddress: '',
     chainId: 4,
@@ -36,54 +44,32 @@ class Login extends React.Component {
     encryptionKey: '',
     messageEncrypted: '',
     buildEnv: 'testing',
+    toursObject: false,
+    toursReady: false
+  }
+  
+  componentDidMount(){
+    this.setupTorus();
   }
 
-  async componentDidMount(){
-    const torusEnv = sessionStorage.getItem('pageUsingTorus');
-    if (torusEnv) {
-      await this.login();
-    }
-    // this.props.LoginHandler(this.login);
-   
+  setupTorus = async ()=>{
+    await torus.init({
+      buildEnv: "mainnet", // uses solana-testing.tor.us (which uses testnet)
+      enableLogging: true,// default : false
+      showTorusButton: true, // default: true
+    }); 
+    this.setState({toursReady:true})
   }
 
-  login = async () => {
+
+   login = async ()=>{
     try {
-      const { torus, web3 } = web3Obj;
+      const { web3 } = web3Obj;
       const { buildEnv, chainIdNetworkMap, chainId } = this.state;
-      await torus.init({
-        buildEnv,
-        enabledVerifiers: {
-          reddit: false,
-        },
-        enableLogging: true,
-        network: {
-          host: chainIdNetworkMap[chainId.toString()], // mandatory
-          chainId,
-          // chainId: 336,
-          // networkName: 'DES Network',
-          // host: 'https://quorum.block360.io/https',
-          // ticker: 'DES',
-          // tickerName: 'DES Coin',
-        },
-        showTorusButton: true,
-        integrity: {
-          version: '1.11.0',
-          check: false,
-          // hash: 'sha384-jwXOV6VJu+PM89ksbCSZyQRjf5FdX8n39nWfE/iQBMh4r5m027ua2tkQ+83FPdp9'
-        },
-        loginConfig: buildEnv === 'lrc' ? {
-          'torus-auth0-email-passwordless': {
-            name: 'torus-auth0-email-passwordless',
-            typeOfLogin: 'passwordless',
-            showOnModal: false,
-          },
-        } : undefined,
-        whiteLabel: whiteLabelData,
-        skipTKey: true,
-      });
       const acc = await torus.login(); // await torus.ethereum.enable()
-      console.log('acc', acc);
+      const publicKey = acc[0];
+      const userInfo = await torus.getUserInfo();
+      console.log('user-info',userInfo);
       sessionStorage.setItem('pageUsingTorus', buildEnv);
       web3Obj.setweb3(torus.provider);
       torus.provider.on('chainChanged', (resp) => {
@@ -98,13 +84,11 @@ class Login extends React.Component {
           publicAddress: (Array.isArray(accounts) && accounts[0]) || '',
         });
       });
-      const accounts = await web3.eth.getAccounts();
-      console.log('accounts[0]', accounts[0]);
-      // const ac = [...accounts][0];
+      
       this.setState({
-        publicAddress: (Array.isArray(accounts) && accounts[0]) || '',
+        publicAddress: publicKey,
       });
-      web3.eth.getBalance(accounts[0]).then(console.log).catch(console.error);
+  
     } catch (error) {
       console.error(error, 'caught in vue-app');
     }
@@ -483,12 +467,12 @@ class Login extends React.Component {
   render() {
     const {
       messageEncrypted, encryptionKey, messageToEncrypt, buildEnv, selectedVerifier,
-      verifierId, placeholder, publicAddress, chainIdNetworkMap, chainId,
+      verifierId, placeholder, publicAddress, chainIdNetworkMap, chainId, toursReady
     } = this.state;
     return (
       <div className="App">
 
-        <Layout clickHandler={() => {
+        <Layout torusstate={toursReady} clickHandler={() => {
           
           this.login.bind(this)()
         }}

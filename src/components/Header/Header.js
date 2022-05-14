@@ -2,6 +2,7 @@ import React from 'react'
 import Diamond from '../../img/Magnifying-glass.png'
 
 export default function Header(props) {
+  
   return (
     
      <>
@@ -24,7 +25,7 @@ export default function Header(props) {
                 
                 </button>
                 :
-                <button onClick={props.LoginHandler} >
+                <button onClick={props.LoginHandler} disabled={!props.torusstate}>
                
                Connect Wallet
               </button>
