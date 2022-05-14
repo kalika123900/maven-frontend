@@ -2,13 +2,13 @@ import React from "react";
 import { encrypt, recoverTypedMessage } from "eth-sig-util";
 import { ethers } from "ethers";
 import { keccak256 } from "ethers/lib/utils";
+import { connect } from "react-redux";
 import { getV3TypedData, getV4TypedData, whiteLabelData } from "./data";
 import web3Obj from "./helper";
+import { setUserToStore } from "./redux/user/actions";
+import { setWalletToStore, resetWalletFromStore } from "./redux/wallet/actions";
 
-import Header from "./components/Header/Header";
 import "./components/Header/header.css";
-import Recommended_users from "./components/Recommended_users/Recommended_users";
-import "./components/Recommended_users/Recommended_users.css";
 
 import { clusterApi, Connection } from "@solana/web3.js";
 
@@ -59,7 +59,8 @@ class Login extends React.Component {
       enableLogging: true, // default : false
       showTorusButton: true, // default: true
     });
-    this.setState({ toursReady: true });
+    //
+    this.props.setWalletInfoToStore({ torusReady: true });
   };
 
   login = async () => {
@@ -69,23 +70,25 @@ class Login extends React.Component {
       const acc = await torus.login(); // await torus.ethereum.enable()
       const publicKey = acc[0];
       const userInfo = await torus.getUserInfo();
-      console.log("user-info", userInfo);
+
+      // set user to store
+      this.props.setUserToStore(userInfo);
+
       sessionStorage.setItem("pageUsingTorus", buildEnv);
       web3Obj.setweb3(torus.provider);
+
       torus.provider.on("chainChanged", (resp) => {
-        console.log(resp, "chainchanged");
-        this.setState({
+        this.props.setWalletInfoToStore({
           chainId: resp,
         });
       });
+
       torus.provider.on("accountsChanged", (accounts) => {
-        console.log(accounts, "accountsChanged");
-        this.setState({
+        this.props.setWalletInfoToStore({
           publicAddress: (Array.isArray(accounts) && accounts[0]) || "",
         });
       });
-
-      this.setState({
+      this.props.setWalletInfoToStore({
         publicAddress: publicKey,
       });
     } catch (error) {
@@ -93,6 +96,7 @@ class Login extends React.Component {
     }
   };
 
+  // Display the widget at bottom left
   toggleTorusWidget = () => {
     const { torus } = web3Obj;
     if (torus.torusWidgetVisibility) {
@@ -458,7 +462,7 @@ class Login extends React.Component {
         if (err) {
           return console.error(err);
         }
-        this.setState({
+        this.props.setWalletInfoToStore({
           encryptionKey: result.result,
         });
         return this.console(`encryption public key => ${result.result}`);
@@ -510,32 +514,17 @@ class Login extends React.Component {
     web3Obj.torus
       .cleanUp()
       .then(() => {
-        this.setState({
-          publicAddress: "",
-        });
+        this.props.resetWalletFromStore();
         return undefined;
       })
       .catch(console.error);
   };
 
   render() {
-    const {
-      messageEncrypted,
-      encryptionKey,
-      messageToEncrypt,
-      buildEnv,
-      selectedVerifier,
-      verifierId,
-      placeholder,
-      publicAddress,
-      chainIdNetworkMap,
-      chainId,
-      toursReady,
-    } = this.state;
+    const { publicAddress, toursReady } = this.state;
     return (
       <div className="App">
         <Layout
-          torusstate={toursReady}
           clickHandler={() => {
             this.login.bind(this)();
           }}
@@ -544,132 +533,27 @@ class Login extends React.Component {
           }}
           publicAddress={publicAddress}
         />
-
-        {/* <div>
-          <h3>Login With Torus</h3>
-          <section>
-            <p>
-              Build Environment :
-              {' '}
-              {buildEnv.toString()}
-
-            </p>
-            {
-              !publicAddress
-                ? (
-                  <div>
-                    <select name="buildEnv" value={buildEnv} onChange={(e) => this.setState({ buildEnv: e.target.value })}>
-                      <option value="production">Production</option>
-                      <option value="binance">Binance</option>
-                      <option selected value="testing">Testing</option>
-                      <option value="development">Development</option>
-                      <option value="lrc">LRC</option>
-                      <option value="beta">Beta</option>
-                    </select>
-                    <button onClick={this.login}>Login</button>
-                  </div>
-                )
-                : <button onClick={this.logout}>Logout</button>
-            }
-
-          </section>
-          {
-              publicAddress
-          && (
-          <section
-            style={{
-              fontSize: '12px',
-            }}
-          >
-            <section>
-              <div>
-                Public Address:
-                <i>{publicAddress.toString()}</i>
-              </div>
-              <div>
-                Network:
-                <i>{chainIdNetworkMap[chainId.toString()]}</i>
-              </div>
-            </section>
-            <section style={{ marginTop: '20px' }}>
-              <h4>Torus Specific Info (Scroll to check actions output in console box below)</h4>
-              <button onClick={this.toggleTorusWidget}>Show/Hide Torus Button</button>
-              <button onClick={this.getUserInfo}>Get User Info</button>
-              <button onClick={this.createPaymentTx}>Create Payment Tx</button>
-              <button onClick={this.changeProvider}>Change Provider</button>
-              <div style={{ marginTop: '20px' }}>
-                <select defaultValue="google" name="verifier" value={selectedVerifier} onChange={(e) => this.onSelectedVerifierChanged(e)}>
-                  <option value="google">Google</option>
-                  <option value="reddit">Reddit</option>
-                  <option value="discord">Discord</option>
-                </select>
-                <input
-                  style={{ marginLeft: '20px' }}
-                  value={verifierId}
-                  placeholder={placeholder}
-                  onChange={(e) => {
-                    this.setState({
-                      verifierId: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <button disabled={!verifierId} style={{ marginTop: '20px' }} onClick={this.getPublicAddress}>Get Public Address</button>
-            </section>
-
-            <section style={{ marginTop: '20px' }}>
-              <h4>Blockchain Apis</h4>
-              <section>
-                <h5>Signing</h5>
-                <button onClick={this.signMessageWithoutPopup}>sign_eth_no_popup</button>
-                <button onClick={this.signPersonalMsg}>personal_sign</button>
-                <button onClick={this.signMessage}>sign_eth</button>
-                <button onClick={this.signTypedDataV1}>sign typed data v1</button>
-                <button onClick={this.signTypedDataV3}>sign typed data v3</button>
-                <button onClick={this.signTypedDataV4}>sign typed data v4</button>
-              </section>
-              <section>
-                <h5>Transactions</h5>
-                <button onClick={this.sendEth}>Send Eth</button>
-                <button onClick={this.sendDai}>Send DAI</button>
-                <button onClick={this.approveKnc}>Approve Knc</button>
-              </section>
-              <section>
-                <h5>Encrypt / Decrypt</h5>
-                <button onClick={this.getEncryptionKey}>Get Encryption Key</button>
-                <div>
-                  <input
-                    style={{ marginLeft: '20px' }}
-                    value={messageToEncrypt}
-                    placeholder="Message to encrypt"
-                    onChange={(e) => {
-                      this.setState({
-                        messageToEncrypt: e.target.value,
-                      });
-                    }}
-                  />
-                  <button disabled={!encryptionKey} onClick={this.encryptMessage}>Encrypt</button>
-                </div>
-                <button disabled={!messageEncrypted} onClick={this.decryptMessage}>Decrypt</button>
-              </section>
-            </section>
-          </section>
-          )
-          }
-
-        </div>
-        {
-          publicAddress
-
-        && (
-        <div id="console" style={{ whiteSpace: 'pre-line' }}>
-          <p style={{ whiteSpace: 'pre-line' }} />
-        </div>
-        )
-  } */}
       </div>
     );
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    wallet: state.wallet,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUserToStore: (user) => dispatch(setUserToStore(user)),
+    setWalletInfoToStore: (walletInfo) => {
+      console.log("here dhamaal", walletInfo);
+      return dispatch(setWalletToStore(walletInfo));
+    },
+    resetWalletFromStore: () => dispatch(resetWalletFromStore()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

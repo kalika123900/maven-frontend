@@ -49,3 +49,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.buttton-disabled{
+  color: grey
+}

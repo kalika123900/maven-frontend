@@ -8,10 +8,15 @@ import Play from "../img/Play.png";
 
 import Stream from "../components/Stream";
 import RecommendedVideos from "../components/Creator/RecommendedVideos";
+import { useSelector } from "react-redux";
+import { DEFAULT_PAGE, GOLIVE, PROFILE_PAGE } from "../routes";
+import ProfilePage from "../Pages/ProfilePage/ProfilePage";
+import GolivePage from "../Pages/GoLive/GolivePage";
 
 // import Login from '../Login';
 
 function Layout(props) {
+  const page = useSelector((state) => state.page);
   const [test, setTest] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -29,7 +34,6 @@ function Layout(props) {
         logoutHandler={props.logoutHandler}
         publicAddress={props.publicAddress}
         LoginHandler={props.clickHandler}
-        torusstate={props.torusstate}
         toggleMenu={handleToggleMenu}
       />
 
@@ -38,91 +42,28 @@ function Layout(props) {
       >
         sidePanel
       </div>
-
       {/* <Login LoginHandler={LoginHandler} /> */}
+      {page.name === DEFAULT_PAGE && (
+        <div className="main_container">
+          <aside style={{ backgroundColor: "rgb(22, 24, 28)" }}>
+            <Recommended_users />
+          </aside>
 
-      <div className="main_container">
-        <aside style={{ backgroundColor: "rgb(22, 24, 28)" }}>
-          <Recommended_users />
-        </aside>
+          <main className="main_con">
+            {/* <Popup/> */}
+            {/* <Stream /> */}
+            {/* <img src={Slider} alt="" /> */}
+            <div style={{ textAlign: "left" }}>
+              <h2>Live channels we think you’ll like</h2>
+            </div>
+            <RecommendedVideos />
+            {props.children}
+          </main>
+        </div>
+      )}
 
-        <main className="main_con">
-          {/* <Popup/> */}
-          {/* <Stream /> */}
-          {/* <img src={Slider} alt="" /> */}
-          <div style={{ textAlign: "left" }}>
-            <h2>Live channels we think you’ll like</h2>
-          </div>
-          <RecommendedVideos />
-
-          {/* <div className="liveChannelFlex">
-            <div className="liveChannelBox">
-              <div className="videoBox">
-                <img src={Play} alt="" />
-              </div>
-              <div class="recommended_users_list">
-                <div>
-                  <div class="recommended_profiles">
-                    <div class="circle"></div>
-                    <div class="recommended_profiles_titel">
-                      <h6>Recommended Profiles</h6>
-                      <p>Recommended Channels</p>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div class="views">
-                    <span class="red_cricle"></span>8.3k
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="liveChannelBox">
-              <div className="videoBox">
-                <img src={Play} alt="" />
-              </div>
-              <div class="recommended_users_list">
-                <div>
-                  <div class="recommended_profiles">
-                    <div class="circle"></div>
-                    <div class="recommended_profiles_titel">
-                      <h6>Recommended Profiles</h6>
-                      <p>Recommended Channels</p>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div class="views">
-                    <span class="red_cricle"></span>8.3k
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="liveChannelBox">
-              <div className="videoBox">
-                <img src={Play} alt="" />
-              </div>
-              <div class="recommended_users_list">
-                <div>
-                  <div class="recommended_profiles">
-                    <div class="circle"></div>
-                    <div class="recommended_profiles_titel">
-                      <h6>Recommended Profiles</h6>
-                      <p>Recommended Channels</p>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div class="views">
-                    <span class="red_cricle"></span>8.3k
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
-          {props.children}
-        </main>
-      </div>
+      {page.name === PROFILE_PAGE && <ProfilePage />}
+      {page.name === GOLIVE && <GolivePage />}
     </div>
   );
 }

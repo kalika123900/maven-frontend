@@ -14,13 +14,23 @@ header h1{
     font-size: 20px;
 }
 
+.search{
+    flex-grow: 1;
+}
+
+
+
 .search input {
-    width: 750px;
+    width: 80%;
     background: #323232;
     color: #fff;
     border: none;
     border-radius: 22px;
-    padding: 20px 30px;
+    padding: 20px 0px 20px 20px;
+}
+
+.connect_wallet{
+    display: flex;
 }
 
 .connect_wallet button{
@@ -46,11 +56,32 @@ header h1{
     top:15px
 }
 
-.header-menu-icon {
-    margin-right: -80px
+.logo{
+    margin-left: 15px;
 }
+
+/* .header-menu-icon {
+    margin-right: -80px
+} */
 
 .header-menu-icon img {
     margin-left: -13px;
     width: 30px;
+}
+
+.header-profile-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bolder;
+}
+
+.header-profile-icon img{
+    margin-left: 10px;
+
+}
+
+.header-profile-icon img:hover{
+    cursor: pointer;
 }
