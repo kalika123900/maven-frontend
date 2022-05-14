@@ -19,7 +19,7 @@ const reducer = (state, action) => {
     case "SUBMIT_API_KEY":
       return {
         ...state,
-        appState: APP_STATES.CREATE_BUTTON,
+        appState: APP_STATES.CREATING_STREAM,
         apiKey: action.payload.apiKey,
       };
     case "CREATE_CLICKED":
