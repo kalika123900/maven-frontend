@@ -1,4 +1,5 @@
 import axios from "axios";
+import {dev} from "../env"
 
 const apiInstance = axios.create({
   baseURL: "/api/",
@@ -42,7 +43,7 @@ export const createStream = (apiKey) => {
   
     const createStreamResponse =  axios.post(
       // "https://livepeer.com/api/stream",
-      "http://localhost:5000/create-stream",
+      `${dev.BASE_URL}/create-stream`,
       // "http://localhost:5000/user/add",
       {
         api_key:apiKey,
@@ -91,10 +92,8 @@ export const getStreamStatus = ( apiKey,streamId) => {
   try {
   
     const createStreamResponse =  axios.post(
-    
-      "http://localhost:5000/stream",
-  
-      {
+     `${dev.BASE_URL}/stream`,
+     {
         api_key:apiKey,
         stream_id:streamId
       

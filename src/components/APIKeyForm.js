@@ -5,7 +5,6 @@ import React from "react";
 const APIKeyForm = ({ setApiKey }) => {
   const submitHandler = (event) => {
     const { apiKey } = event.target;
-
     setApiKey(apiKey.value);
   };
 
@@ -19,7 +18,9 @@ const APIKeyForm = ({ setApiKey }) => {
         placeholder="api key"
         className="border active:border-livepeer p-2 w-full rounded"
         name="apiKey"
+ 
       />
+      <input type="submit" value="Get Streaming Key" />
       {/* <label className="text-sm text-gray-400 text-right">
         Press <strong>Enter</strong> to submit
       </label> */}
