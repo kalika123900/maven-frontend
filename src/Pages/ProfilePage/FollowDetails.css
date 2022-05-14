@@ -1,0 +1,30 @@
+.followDetailsWrapper{
+    text-align: left;
+    color: white;
+    display: flex;
+}
+
+.userHandler{
+    font-size: 12px;;
+}
+
+.actionButtons{
+    display: flex;
+    margin-left: 10px
+}
+
+.actionButton{
+    background-color: none;
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+}
+
+.folloItems{
+    display: flex;
+}
+
+.followItem{
+    margin-right: 20px;
+    font-size: 13px;
+}
