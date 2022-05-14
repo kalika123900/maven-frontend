@@ -14,8 +14,8 @@ function FollowDetails() {
         </div>
       </div>
       <div className="actionButtons">
-        <button className="actionButton">edit</button>
-        <button className="actionButton">setting</button>
+        <button className="actionButton1">edit</button>
+        <button className="actionButton1">setting</button>
       </div>
       <div style={{ flexGrow: 1 }}></div>
       <div className="folloItems">

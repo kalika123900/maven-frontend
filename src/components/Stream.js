@@ -69,7 +69,7 @@ function App() {
       (async function () {
         try {
           const streamCreateResponse = await createStream(state.apiKey);
-         
+
           if (streamCreateResponse.data) {
             const {
               id: streamId,
@@ -114,7 +114,7 @@ function App() {
           state.apiKey,
           state.streamId
         );
-    
+
         if (streamStatusResponse.data) {
           const { isActive } = streamStatusResponse.data;
           dispatch({
@@ -129,10 +129,18 @@ function App() {
     };
   }, [state.appState]);
 
+  const VideoStarted = false;
+
   return (
-    <main className="container pb-12 h-screen m-auto pt-24 lg:pt-40" style={{    display: 'grid',
-      'place-items': 'center',
-      height: '100vh'}}>
+    <div
+      className="container pb-12 h-screen m-auto pt-24 lg:pt-40"
+      // style={{
+      //   display: "grid",
+      //   "place-items": "center",
+      //   height: "100vh",
+      //   backgroundColor: "#303233",
+      // }}
+    >
       {/* <header className="w-full p-3 flex justify-between items-center fixed top-0 left-0 z-10 bg-white">
         <a
           href="https://livepeer.com/docs/"
@@ -150,7 +158,6 @@ function App() {
           Reset Demo
         </button>
       </header> */}
-    
 
       <AppBody
         state={state}
@@ -159,13 +166,7 @@ function App() {
         }
         createStream={() => dispatch({ type: "CREATE_CLICKED" })}
       />
-      {/* <footer className="fixed bottom-0 left-0 w-full h-12 flex items-center justify-center">
-        Made with the&nbsp;
-        <a href="https://livepeer.com/docs/" className="text-livepeer text-xl">
-          Livepeer.com
-        </a>
-        &nbsp;API
-      </footer> */}
+
       {state.error && (
         <div className="bg-black bg-opacity-60 flex items-center justify-center fixed top-0 left-0 h-screen w-screen">
           <div className="flex flex-col w-1/3 h-56 bg-white p-12 items-center text-center text-lg rounded">
@@ -179,9 +180,8 @@ function App() {
           </div>
         </div>
       )}
-    </main>
+    </div>
   );
 }
-
 
 export default App;

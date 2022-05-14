@@ -1,0 +1,9 @@
+.golive-wrapper{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    background-color: #323232;
+    color: white;
+    padding: 20px;
+    min-height: 100vh;
+}

@@ -1,0 +1,84 @@
+.video-details-wrapper{
+    background-color: #000;
+    border-radius: 25px;
+    padding: 25px;
+    text-align: left;
+}
+
+.names-details{
+    display: flex;
+}
+
+.name-data{
+    width: 50%;
+    text-align: left;
+}
+
+.user-name{
+    width: 50%;
+    text-align: left;
+}
+
+.detail-item-data{
+    color: grey;
+    
+}
+
+.detail-item{
+    text-align: left;
+    margin-top: 12px;
+}
+
+.underline{
+    border-bottom: 2px solid white;
+}
+
+.action-button2{
+    border: 1px solid white;
+    background-color: none;
+    color: white;
+    border-radius: 15px;
+}
+
+.stream-to-different{
+    padding: 20px;
+    border: 1px solid white;
+    background-color: none;
+    color: white;
+    border-radius: 15px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.action-button-live{
+    padding: 20px;
+    border: 1px solid white;
+    background-color: none;
+    color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.action-buttons-live{
+    display: flex;
+    justify-content: space-between;
+}
+
+.color-green{
+    background-color: green;
+}
+
+.color-red{
+    background-color: red;
+}
+
+/* .detail-item-title .detail-item-data{
+    text-align: left;
+} */
+

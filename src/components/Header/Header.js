@@ -72,7 +72,7 @@ export default function Header(props) {
                     }}
                   >
                     <div>{user.name}</div>
-                    <div>{user.email}</div>
+                    <div style={{ fontSize: "9px" }}>{user.email}</div>
                   </div>
                   <img
                     style={{
