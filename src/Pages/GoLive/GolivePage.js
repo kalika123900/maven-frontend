@@ -8,7 +8,7 @@ import "./Golive.css";
 
 function GolivePage() {
   return (
-    <div className="main_container" style={{ minHeight: "100vh" }}>
+    <div className="">
       {/* <aside style={{ backgroundColor: "rgb(22, 24, 28)" }}></aside> */}
       <div className="golive-wrapper">
         <Stream />

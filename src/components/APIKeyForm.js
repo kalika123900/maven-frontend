@@ -1,6 +1,6 @@
 import React from "react";
 
-
+import "./Live.css";
 
 const APIKeyForm = ({ setApiKey }) => {
   const submitHandler = (event) => {
@@ -10,17 +10,21 @@ const APIKeyForm = ({ setApiKey }) => {
 
   return (
     <form
-      className="px-4 h-3/5 flex justify-center flex-col lg:max-w-screen-md m-auto"
+      className="video-streamingForm px-4 h-3/5 flex justify-center flex-col lg:max-w-screen-md m-auto"
       onSubmit={submitHandler}
     >
+      <h1>ENTER STREAMING KEY</h1>
       <input
         type="text"
         placeholder="api key"
-        className="border active:border-livepeer p-2 w-full rounded"
+        className="border developer-key-placeholder active:border-livepeer p-2 w-full rounded"
         name="apiKey"
- 
       />
-      <input type="submit" value="Get Streaming Key" />
+      <input
+        className="streaming-key-button"
+        type="submit"
+        value="Get Streaming Key"
+      />
       {/* <label className="text-sm text-gray-400 text-right">
         Press <strong>Enter</strong> to submit
       </label> */}
@@ -33,6 +37,21 @@ const APIKeyForm = ({ setApiKey }) => {
           here
         </a>
       </div> */}
+
+      <div className="video-streaming-details">
+        <div className="how-to-get">How to get API key?</div>
+        <div className="solution-live-peer">
+          <ol>
+            <li>
+              Go to <a href="https://livepeer.org/"></a>
+            </li>
+            <li>Login to Livepeer</li>
+            <li>Goto Developr Section</li>
+            <li>Create developer key</li>
+            <li>Copy and paste the developer key to below form</li>
+          </ol>
+        </div>
+      </div>
     </form>
   );
 };

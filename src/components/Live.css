@@ -1,0 +1,30 @@
+.how-to-get{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.solution-live-peer{
+    text-align: left;
+}
+
+.developer-key-placeholder{
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 10px 50px;
+    border-radius: 20px;
+}
+
+.streaming-key-button{
+    background: rgb(129, 162, 129);
+    padding: 10px 15px;
+    color: white;
+
+    border-radius: 20px;
+    margin-left: 20px;
+
+}
+
+.video-streaming-details{
+    margin-top: 100px;
+}

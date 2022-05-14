@@ -9,11 +9,7 @@ import APIKeyForm from "./APIKeyForm";
 
 import { APP_STATES } from "../utils/types";
 
-
-
-
 const AppBody = ({ state, setApiKey, createStream }) => {
-
   const { playbackId, streamIsActive, streamKey } = state;
   const [showRequest, setShowRequest] = React.useState(false);
   const [videoEl, setVideoEl] = React.useState(null);
@@ -123,6 +119,7 @@ const AppBody = ({ state, setApiKey, createStream }) => {
                 className="h-full w-full video-js vjs-theme-city"
                 controls
                 playsInline
+                style={{ width: "1000px", height: "562px" }}
               />
             </div>
             <div className="bg-white rounded-xl flex items-center justify-center absolute right-2 top-2 p-1 text-xs">
@@ -140,14 +137,14 @@ const AppBody = ({ state, setApiKey, createStream }) => {
             stream, please use a broadcaster software like OBS/Streamyard on
             desktop, or Larix on mobile
           </div> */}
-          <div className="w-11/12 lg:w-full xl:w-3/5 border  p-2 m-4 flex flex-col text-sm">
+          {/* <div className="w-11/12 lg:w-full xl:w-3/5 border  p-2 m-4 flex flex-col text-sm">
             <div className="flex items-center justify-between mt-2 break-all">
               <span>
                 Ingest URL:
                 <br />
                 rtmp://rtmp.livepeer.com/live/
-              </span>
-              {/* <button
+              </span> */}
+          {/* <button
                 onClick={() =>
                   copyTextToClipboard(`rtmp://rtmp.livepeer.com/live/`)
                 }
@@ -155,27 +152,27 @@ const AppBody = ({ state, setApiKey, createStream }) => {
               >
                 Copy
               </button> */}
-            </div>
+          {/* </div>
             <div className="flex items-center justify-between mt-2 break-all mb-6">
               <span>
                 Stream Key:
                 <br />
                 {streamKey}
-              </span>
-              {/* <button
+              </span> */}
+          {/* <button
                 onClick={() => copyTextToClipboard(streamKey)}
                 className="border ml-1 p-1 rounded text-sm break-normal"
               >
                 Copy
               </button> */}
-            </div>
+          {/* </div>
             <div className="flex items-center justify-between mt-2 break-all">
               <span>
                 Playback URL:
                 <br />
                 https://cdn.livepeer.com/hls/{playbackId}/index.m3u8
-              </span>
-              {/* <button
+              </span> */}
+          {/* <button
                 onClick={() =>
                   copyTextToClipboard(
                     `https://cdn.livepeer.com/hls/${playbackId}/index.m3u8`
@@ -185,8 +182,8 @@ const AppBody = ({ state, setApiKey, createStream }) => {
               >
                 Copy
               </button> */}
-            </div>
-          </div>
+          {/* </div>
+          </div> */}
           <div className="w-11/12 lg:w-full xl:w-3/5 flex flex-col items-center mt-8">
             {/* <button
               onClick={() => setShowRequest((val) => !val)}

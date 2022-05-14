@@ -3,11 +3,10 @@ import React from "react";
 import { APP_STATES } from "../utils/types";
 import AppBody from "./AppBody";
 import { createStream, getStreamStatus } from "../utils/apiFactory";
-import {useSelector,useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux";
 function App() {
-
   const dispatch = useDispatch();
-  const state = useSelector((state)=>state.stream);
+  const state = useSelector((state) => state.stream);
 
   React.useEffect(() => {
     if (state.appState === APP_STATES.CREATING_STREAM) {
@@ -79,12 +78,12 @@ function App() {
   return (
     <div
       className="container pb-12 h-screen m-auto pt-24 lg:pt-40"
-      // style={{
-      //   display: "grid",
-      //   "place-items": "center",
-      //   height: "100vh",
-      //   backgroundColor: "#303233",
-      // }}
+      style={{
+        display: "grid",
+        "place-items": "center",
+        height: "90vh",
+        backgroundColor: "#303233",
+      }}
     >
       {/* <header className="w-full p-3 flex justify-between items-center fixed top-0 left-0 z-10 bg-white">
         <a
