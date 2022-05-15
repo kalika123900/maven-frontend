@@ -6,6 +6,7 @@ import Menu from "../../img/menu.svg";
 import ProfileSvg from "../../img/profile.svg";
 import { changePageToStore } from "../../redux/page/action";
 import { GOLIVE, PROFILE_PAGE } from "../../routes";
+import Logo from "../../img/logo.png";
 
 export default function Header(props) {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ export default function Header(props) {
             <img onClick={() => toggleMenu()} src={Menu} alt="menu" />
           </div>
           <div className="logo">
-            <h1>De-stream</h1>
+            <img style={{ width: "130px" }} src={Logo} />
           </div>
           <div className="search">
             <input

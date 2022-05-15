@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Header from "../components/Header/Header";
-import Popup from "../components/Popup/Popup";
-import "../components/Popup/Popup.css";
 import Recommended_users from "../components/Recommended_users/Recommended_users";
 import Slider from "../img/slider.jpg";
 import Play from "../img/Play.png";
