@@ -1,6 +1,7 @@
 import React from "react";
 import { encrypt, recoverTypedMessage } from "eth-sig-util";
 import { ethers } from "ethers";
+import axios from "axios";
 import { keccak256 } from "ethers/lib/utils";
 import { connect } from "react-redux";
 import { getV3TypedData, getV4TypedData, whiteLabelData } from "./data";
@@ -24,6 +25,8 @@ import "../src/hoc/Layout.css";
 
 const tokenAbi = require("human-standard-token-abi");
 const torus = new Torus();
+
+import { url } from "./env";
 
 class Login extends React.Component {
   state = {
@@ -72,7 +75,19 @@ class Login extends React.Component {
       const userInfo = await torus.getUserInfo();
 
       // set user to store
-      this.props.setUserToStore(userInfo);
+      try {
+        const res = await axios.post(`${url("/user/create")}`, userInfo);
+        if (res.data) {
+          console.log(res.data.data.hexa);
+          this.props.setUserToStore({
+            ...userInfo,
+            hexa: res.data.data.hexa,
+            userId: res.data.data.id,
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
 
       sessionStorage.setItem("pageUsingTorus", buildEnv);
       web3Obj.setweb3(torus.provider);

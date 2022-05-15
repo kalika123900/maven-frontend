@@ -8,6 +8,9 @@ const initialState = {
   verifier: "",
   typeOfLogin: "",
   aggregateVerifier: "",
+  hexa: "",
+  users: [],
+  userId: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -32,6 +35,9 @@ const authReducer = (state = initialState, action) => {
           verifierId: payload.verifierId
             ? payload.verifierId
             : state.verifierId,
+          hexa: payload.hexa ? payload.hexa : state.hexa,
+          users: payload.users ? payload.users : state.users,
+          userId: payload.userId ? payload.userId : state.userId,
         };
       } else {
         return {
@@ -50,6 +56,10 @@ const authReducer = (state = initialState, action) => {
           verifierId: payload.verifierId
             ? payload.verifierId
             : state.verifierId,
+
+          hexa: payload.hexa ? payload.hexa : state.hexa,
+          users: payload.users ? payload.users : state.users,
+          userId: payload.userId ? payload.userId : state.userId,
         };
       }
     }
@@ -64,6 +74,9 @@ const authReducer = (state = initialState, action) => {
         verifier: "",
         typeOfLogin: "",
         aggregateVerifier: "",
+        hexa: "",
+        users: [],
+        userId: null,
       };
 
     default:

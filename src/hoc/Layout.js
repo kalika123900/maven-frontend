@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import Header from "../components/Header/Header";
+import { useNavigate } from "react-router-dom";
 import Recommended_users from "../components/Recommended_users/Recommended_users";
 import Slider from "../img/slider.jpg";
 import Play from "../img/Play.png";
@@ -14,7 +17,8 @@ import GolivePage from "../Pages/GoLive/GolivePage";
 // import Login from '../Login';
 
 function Layout(props) {
-  const page = useSelector((state) => state.page);
+  const { page, user } = useSelector((state) => state);
+  const navigate = useNavigate();
   const [test, setTest] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -26,22 +30,22 @@ function Layout(props) {
     setOpenMenu(!openMenu);
   };
 
-  return (
-    <div className="page-wrapper">
-      <Header
-        logoutHandler={props.logoutHandler}
-        publicAddress={props.publicAddress}
-        LoginHandler={props.clickHandler}
-        toggleMenu={handleToggleMenu}
-      />
-
-      <div
-        className={`sidePanel ${openMenu ? "sidePanelOpen" : "sidePanelClose"}`}
-      >
-        sidePanel
-      </div>
-      {/* <Login LoginHandler={LoginHandler} /> */}
-      {page.name === DEFAULT_PAGE && (
+  const Home = () => {
+    return (
+      <>
+        <Header
+          logoutHandler={props.logoutHandler}
+          publicAddress={props.publicAddress}
+          LoginHandler={props.clickHandler}
+          toggleMenu={handleToggleMenu}
+        />
+        <div
+          className={`sidePanel ${
+            openMenu ? "sidePanelOpen" : "sidePanelClose"
+          }`}
+        >
+          sidePanel
+        </div>
         <div className="main_container">
           <aside style={{ backgroundColor: "rgb(22, 24, 28)" }}>
             <Recommended_users />
@@ -58,10 +62,65 @@ function Layout(props) {
             {props.children}
           </main>
         </div>
-      )}
+      </>
+    );
+  };
 
-      {page.name === PROFILE_PAGE && <ProfilePage />}
-      {page.name === GOLIVE && <GolivePage />}
+  const ProfilePageBundle = () => {
+    if (!user.email) {
+      navigate("/");
+    }
+    return (
+      <>
+        <Header
+          logoutHandler={props.logoutHandler}
+          publicAddress={props.publicAddress}
+          LoginHandler={props.clickHandler}
+          toggleMenu={handleToggleMenu}
+        />
+        <div
+          className={`sidePanel ${
+            openMenu ? "sidePanelOpen" : "sidePanelClose"
+          }`}
+        >
+          sidePanel
+        </div>
+        <ProfilePage />
+      </>
+    );
+  };
+
+  const GoLiveBundle = () => {
+    if (!user.email) {
+      navigate("/");
+    }
+    return (
+      <>
+        <Header
+          logoutHandler={props.logoutHandler}
+          publicAddress={props.publicAddress}
+          LoginHandler={props.clickHandler}
+          toggleMenu={handleToggleMenu}
+        />
+        <div
+          className={`sidePanel ${
+            openMenu ? "sidePanelOpen" : "sidePanelClose"
+          }`}
+        >
+          sidePanel
+        </div>
+        <GolivePage />
+      </>
+    );
+  };
+
+  return (
+    <div className="page-wrapper">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:hexa" element={<ProfilePageBundle />} />
+        <Route path="/live/:hexa" element={<GoLiveBundle />} />
+      </Routes>
     </div>
   );
 }

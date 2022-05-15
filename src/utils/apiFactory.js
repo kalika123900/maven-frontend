@@ -1,5 +1,5 @@
 import axios from "axios";
-import {dev} from "../env"
+import { dev } from "../env";
 
 const apiInstance = axios.create({
   baseURL: "/api/",
@@ -7,15 +7,14 @@ const apiInstance = axios.create({
 });
 
 export const createStream = (apiKey) => {
-
   const authorizationHeader = {
     headers: {
       "content-type": "application/json",
       authorization: `Bearer ${apiKey}`,
     },
   };
-  const streamName = 'Testing';
-  const streamProfiles =  [
+  const streamName = "Testing";
+  const streamProfiles = [
     {
       name: "720p",
       bitrate: 2000000,
@@ -37,16 +36,15 @@ export const createStream = (apiKey) => {
       width: 640,
       height: 360,
     },
-  ]
+  ];
 
   try {
-  
-    const createStreamResponse =  axios.post(
+    const createStreamResponse = axios.post(
       // "https://livepeer.com/api/stream",
-      `${dev.BASE_URL}/create-stream`,
+      `${dev.BASE_URL}/api/stream/create`,
       // "http://localhost:5000/user/add",
       {
-        api_key:apiKey,
+        api_key: apiKey,
         name: streamName,
         profiles: streamProfiles,
       },
@@ -60,8 +58,7 @@ export const createStream = (apiKey) => {
 
     return createStreamResponse;
     if (createStreamResponse) {
-   
-      return {data:createStreamResponse};
+      return { data: createStreamResponse };
       // res.statusCode = 200;
       // res.json({ ...createStreamResponse.data });
     } else {
@@ -77,26 +74,22 @@ export const createStream = (apiKey) => {
     }
     // res.json({ error });
   }
-  
 };
 
-export const getStreamStatus = ( apiKey,streamId) => {
-
+export const getStreamStatus = (apiKey, streamId) => {
   const authorizationHeader = {
     headers: {
       "content-type": "application/json",
       authorization: `Bearer ${apiKey}`,
     },
   };
-  
+
   try {
-  
-    const createStreamResponse =  axios.post(
-     `${dev.BASE_URL}/stream`,
-     {
-        api_key:apiKey,
-        stream_id:streamId
-      
+    const createStreamResponse = axios.post(
+      `${dev.BASE_URL}/api/stream`,
+      {
+        api_key: apiKey,
+        stream_id: streamId,
       },
       {
         headers: {
@@ -108,8 +101,7 @@ export const getStreamStatus = ( apiKey,streamId) => {
 
     return createStreamResponse;
     if (createStreamResponse) {
-   
-      return {data:createStreamResponse};
+      return { data: createStreamResponse };
       // res.statusCode = 200;
       // res.json({ ...createStreamResponse.data });
     } else {
@@ -125,7 +117,6 @@ export const getStreamStatus = ( apiKey,streamId) => {
     }
     // res.json({ error });
   }
-  
 };
 
 // export const getStreamStatus = (
@@ -139,7 +130,6 @@ export const getStreamStatus = ( apiKey,streamId) => {
 //     },
 //   });
 // };
-
 
 // const getStreamStatus = async (req, res) => {
 //   if (req.method === "GET") {

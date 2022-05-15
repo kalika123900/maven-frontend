@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Diamond from "../../img/Magnifying-glass.png";
 import Menu from "../../img/menu.svg";
@@ -7,20 +7,21 @@ import ProfileSvg from "../../img/profile.svg";
 import { changePageToStore } from "../../redux/page/action";
 import { GOLIVE, PROFILE_PAGE } from "../../routes";
 import Logo from "../../img/logo.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Header(props) {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const wallet = useSelector((state) => state.wallet);
   const user = useSelector((state) => state.user);
 
   const { toggleMenu } = props;
 
   const goToProfilePage = () => {
-    dispatch(changePageToStore(PROFILE_PAGE));
+    navigate(`/${user.hexa}`);
   };
 
   const goToGoLivePage = () => {
-    dispatch(changePageToStore(GOLIVE));
+    navigate(`/live/${user.hexa}`);
   };
 
   return (
@@ -30,8 +31,8 @@ export default function Header(props) {
           <div className="header-menu-icon">
             <img onClick={() => toggleMenu()} src={Menu} alt="menu" />
           </div>
-          <div className="logo">
-            <img style={{ width: "130px" }} src={Logo} />
+          <div className="logo" onClick={() => navigate(`/live/${user.hexa}`)}>
+            <img style={{ width: "150px" }} src={Logo} />
           </div>
           <div className="search">
             <input
